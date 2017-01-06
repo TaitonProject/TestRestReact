@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import config from '../../etc/config.json';
+import config from '../../etc/config';
 
 import '../models/Note';
 
@@ -16,9 +16,9 @@ export function listNotes(id) {
 
 export function createNote(data) {
     const note = new Note({
-        title: data.title,
-        text: data.text,
-        color: data.color,
+        author: data.author,
+        dateTimeStart: data.dateTimeStart,
+        dateTimeEnd: data.dateTimeEnd,
         createdAt: new Date()
     });
 

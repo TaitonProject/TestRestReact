@@ -2,21 +2,23 @@ import React from 'react';
 
 import './Note.less';
 
+import Timestamp from 'grommet/components/Timestamp';
+
 const Note = React.createClass({
     render() {
-        const style = { backgroundColor: this.props.color };
 
         return (
-            <div className='Note' style={style}>
+            <div className='Note'>
                 <span className='Note__del-icon' onClick={this.props.onDelete}> × </span>
                 {
-                    this.props.title
+                    this.props.author
                     ?
-                        <h4 className='Note__title'>{this.props.title}</h4>
+                        <h4 className='Note__title'>{this.props.author}</h4>
                     :
                         null
                 }
-                <div className='Note__text'>{this.props.children}</div>
+                <div className='Note__dateTimeStart'>{this.props.dateTimeStart}</div>
+                <div className='Note__dateTimeEnd'>{this.props.dateTimeEnd}</div>
             </div>
         );
     }

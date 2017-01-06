@@ -23,11 +23,11 @@ const NotesGrid = React.createClass({
                     this.props.notes.map(note =>
                         <Note
                             key={note.id}
-                            title={note.title}
                             onDelete={this.props.onNoteDelete.bind(null, note)}
-                            color={note.color}
                         >
-                            {note.text}
+                            author={note.author}
+                            dateTimeStart={note.dateTimeStart}
+                            dateTimeEnd={note.dateTimeEnd}
                         </Note>
                     )
                 }

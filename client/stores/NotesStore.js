@@ -12,9 +12,9 @@ let _isLoading = true;
 function formatNote(note) {
     return {
         id: note._id,
-        title: note.title,
-        text: note.text,
-        color: note.color || '#ffffff',
+        author: note.author,
+        dateTimeStart: note.dateTimeStart,
+        dateTimeEnd: note.dateTimeEnd,
         createdAt: note.createdAt
     };
 }

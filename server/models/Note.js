@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const NoteSchema = new Schema({
-    title     : { type: String },
-    text      : { type: String, required: true },
-    color     : { type: String },
+    author     : { author: String },
+    dateTimeStart  : { type: Date, required: true},
+    dateTimeEnd  : { type: Date, required: true},
     createdAt : { type: Date }
 });
 

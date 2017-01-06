@@ -1,39 +1,39 @@
 import React from 'react';
 
-import ColorPicker from './ColorPicker.jsx';
 
 import './NoteEditor.less';
 
 const NoteEditor = React.createClass({
     getInitialState() {
         return {
-            title: '',
-            text: '',
-            color: '#FFFFFF'
+            author: '',
+            dateTimeStart: '',
+            dateTimeEnd: ''
         };
     },
 
-    handleTextChange(event) {
-        this.setState({ text: event.target.value });
+    handleAuthorChange(event) {
+        this.setState({ author: event.target.value });
     },
 
-    handleTitleChange(event) {
-        this.setState({ title: event.target.value });
+    handleDateTimeStartChange(event) {
+        this.setState({ dateTimeStart: event.target.value });
     },
 
-    handleColorChange(color) {
-        this.setState({ color });
+    handleDateTimeEndChange(event) {
+        this.setState({ dateTimeEnd: event.target.value });
     },
+
 
     handleNoteAdd() {
         const newNote = {
-            title: this.state.title,
-            text: this.state.text,
-            color: this.state.color
+            author: this.state.author,
+            dateTimeStart: this.state.dateTimeStart,
+            dateTimeEnd: this.state.dateTimeEnd
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ text: '', title: '', color: '#FFFFFF' });
+        this.setState({ author: '', dateTimeStart: null , dateTimeEnd: null});
     },
 
     render() {
@@ -41,26 +41,27 @@ const NoteEditor = React.createClass({
             <div className='NoteEditor'>
                 <input
                     type='text'
-                    className='NoteEditor__title'
-                    placeholder='Enter title'
-                    value={this.state.title}
-                    onChange={this.handleTitleChange}
+                    className='NoteEditor__author'
+                    placeholder='Enter author'
+                    value={this.state.author}
+                    onChange={this.handleAuthorChange}
                 />
-                <textarea
-                    placeholder='Enter note text'
-                    rows={5}
-                    className='NoteEditor__text'
-                    value={this.state.text}
-                    onChange={this.handleTextChange}
+                <input
+                    type="datetime-local"
+                    className="NoteEditor__dateTimeStart"
+                    value={this.state.dateTimeStart}
+                    onChange={this.handleDateTimeStartChange}
+                />
+                <input
+                    type="datetime-local"
+                    className="NoteEditor__dateTimeEnd"
+                    value={this.state.dateTimeEnd}
+                    onChange={this.handleDateTimeEndChange}
                 />
                 <div className='NoteEditor__footer'>
-                    <ColorPicker
-                        value={this.state.color}
-                        onChange={this.handleColorChange}
-                    />
                     <button
                         className='NoteEditor__button'
-                        disabled={!this.state.text}
+                        disabled={!this.state.author}
                         onClick={this.handleNoteAdd}
                     >
                         Add
