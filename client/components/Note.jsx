@@ -13,7 +13,7 @@ const Note = React.createClass({
                 {
                     this.props.author
                     ?
-                        <h4 className='Note__title'>{this.props.author}</h4>
+                        <h4 className='Note__author'>{this.props.author}</h4>
                     :
                         null
                 }

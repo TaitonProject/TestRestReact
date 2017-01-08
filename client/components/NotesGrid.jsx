@@ -24,10 +24,11 @@ const NotesGrid = React.createClass({
                         <Note
                             key={note.id}
                             onDelete={this.props.onNoteDelete.bind(null, note)}
-                        >
                             author={note.author}
                             dateTimeStart={note.dateTimeStart}
                             dateTimeEnd={note.dateTimeEnd}
+                        >
+
                         </Note>
                     )
                 }
