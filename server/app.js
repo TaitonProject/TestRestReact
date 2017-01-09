@@ -29,9 +29,9 @@ app.use(function(err, req, res, next){
 });
 
 // RESTful api handlers
-app.get('/notes', (req, res) => {
+/*app.get('/notes', (req, res) => {
     db.listNotes().then(data => res.send(data));
-});
+});*/
 
 app.post('/notes', function(req, res) {
     const note = new Note({
@@ -67,6 +67,11 @@ app.post('/notes', function(req, res) {
     db.createNote(req.body).then(data => res.send(data)).reject(res.statusCode = 400);
 });*/
 
+app.get('/notes', (req, res) => {
+    console.log(req.params.dateTimeStart);
+    console.log('gg ' + req);
+    db.listByDate(req.params.dateTimeStart).then(data => res.send(data));
+});
 
 app.delete('/notes/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));

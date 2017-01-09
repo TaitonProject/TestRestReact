@@ -21,7 +21,7 @@ const App = React.createClass({
     },
 
     componentWillMount() {
-        NotesActions.loadNotes();
+        NotesActions.getListByDate(this._onChange);
     },
 
     componentDidMount() {
@@ -40,11 +40,15 @@ const App = React.createClass({
         NotesActions.createNote(noteData);
     },
 
+    handleGetListByDate(date) {
+        NotesActions.getListByDate(date);
+    },
+
     render() {
         return (
             <div className='App'>
                 <h2 className='App__header'>NotesApp</h2>
-                <NoteEditor onNoteAdd={this.handleNoteAdd} />
+                <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleGetListByDate} />
                 <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
             </div>
         );

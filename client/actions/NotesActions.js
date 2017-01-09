@@ -4,12 +4,12 @@ import Constants from '../constants/AppConstants';
 import api from '../api';
 
 const NoteActions = {
-    loadNotes() {
+    getListByDate(date) {
         AppDispatcher.dispatch({
             type: Constants.LOAD_NOTES_REQUEST
         });
 
-        api.listNotes()
+        api.getListByDate(date)
         .then(({ data }) =>
             AppDispatcher.dispatch({
                 type: Constants.LOAD_NOTES_SUCCESS,
@@ -27,7 +27,7 @@ const NoteActions = {
     createNote(note) {
         api.createNote(note)
         .then(() =>
-            this.loadNotes()
+            this.getListByDate(date)
         )
         .catch(err =>
             console.error(err)
@@ -37,12 +37,12 @@ const NoteActions = {
     deleteNote(noteId) {
         api.deleteNote(noteId)
         .then(() =>
-            this.loadNotes()
+            this.getListByDate(date)
         )
         .catch(err =>
             console.error(err)
         );
-    }
+    },
 };
 
 export default NoteActions;

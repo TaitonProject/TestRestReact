@@ -17,7 +17,12 @@ const NoteEditor = React.createClass({
     },
 
     handleDateTimeStartChange(event) {
+        const date = {
+            dateTimeStart : this.state.dateTimeStart
+        };
+
         this.setState({ dateTimeStart: event.target.value });
+        this.props.getListByDate(date);
     },
 
     handleDateTimeEndChange(event) {
@@ -33,7 +38,7 @@ const NoteEditor = React.createClass({
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ author: '', dateTimeStart: null , dateTimeEnd: null});
+        this.setState({ author: null, dateTimeStart: null , dateTimeEnd: null});
     },
 
     render() {

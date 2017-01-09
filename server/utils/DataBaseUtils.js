@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import moment from 'moment';
 import config from '../../etc/config';
 
 import '../models/Note';
@@ -10,8 +10,20 @@ export function setUpConnection() {
     mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
 }
 
-export function listNotes() {
+/*export function listNotes() {
     return Note.find();
+}*/
+
+export function listByDate(date) {
+    console.log('дата в listByDate ' + date);
+    var startDay = moment(date, 'YYYY-MM-DD').hours(0).minutes(0).seconds(0);
+    var endDay = moment(date, 'YYYY-MM-DD').hours(24).minutes(0).seconds(0);
+    console.log(startDay);
+    console.log(endDay);
+
+    return Note.find({dateTimeStart : moment(date, 'YYYY-MM-DD').hours(0).minutes(0).seconds(0)}, function (err, notes) {
+        console.log('выбрали по дате ' + notes)
+    });
 }
 
 /*export function createNote(data) {
