@@ -11,14 +11,10 @@ const Note = React.createClass({
             <div className='Note'>
                 <span className='Note__del-icon' onClick={this.props.onDelete}> × </span>
                 {
-                    this.props.author
-                    ?
-                        <h4 className='Note__author'>{this.props.author}</h4>
-                    :
-                        null
+                        <h4 className='Note__author'>{this.props.employee}</h4>
                 }
-                <div className='Note__dateTimeStart'>{this.props.dateTimeStart}</div>
-                <div className='Note__dateTimeEnd'>{this.props.dateTimeEnd}</div>
+                <div className='Note__dateTimeStart'>{this.props.requestedTime}</div>
+                <div className='Note__dateTimeEnd'>{this.props.durationTime}</div>
             </div>
         );
     }

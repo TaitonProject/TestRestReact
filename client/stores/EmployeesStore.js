@@ -5,17 +5,14 @@ import AppConstants from '../constants/AppConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _notes = [];
+let _employees = [];
 let _loadingError = null;
 let _isLoading = true;
 
-function formatNote(note) {
+function formatEmployee(employee) {
     return {
-        id: note.idEmployee,
-        employee: note.employee,
-        requestedDate: note.requestedDate,
-        durationTime: note.durationTime,
-        requestedTime: note.requestedTime
+        id: employee.id,
+        name: employee.name
     };
 }
 
@@ -24,8 +21,8 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
         return _isLoading;
     },
 
-    getNotes() {
-        return _notes;
+    getEmployees() {
+        return _employees;
     },
 
     emitChange: function() {
@@ -43,22 +40,22 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(action) {
     switch(action.type) {
-        case AppConstants.LOAD_NOTES_REQUEST: {
+        case AppConstants.LOAD_EMPLOYEES_REQUEST: {
             _isLoading = true;
 
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_SUCCESS: {
+        case AppConstants.LOAD_EMPLOYEES_SUCCESS: {
             _isLoading = false;
-            _notes = action.notes.map( formatNote );
+            _employees = action.employees.map( formatEmployee );
             _loadingError = null;
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_FAIL: {
+        case AppConstants.LOAD_EMPLOYEES_FAIL: {
             _loadingError = action.error;
 
             TasksStore.emitChange();

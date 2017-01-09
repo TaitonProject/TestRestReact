@@ -7,8 +7,6 @@ import { serverPort } from '../etc/config';
 
 import * as db from './utils/DataBaseUtils';
 
-import mongoose from "mongoose";
-const Note = mongoose.model('Note');
 // Initialization of express application
 const app = express();
 
@@ -29,11 +27,11 @@ app.use(function(err, req, res, next){
 });
 
 // RESTful api handlers
-app.get('/notes', (req, res) => {
-    db.listNotes().then(data => res.send(data));
+app.get('/reservation/:date', (req, res) => {
+    db.listNotes(req.param.dateTimeStart).then(data => res.send(data));
 });
 
-app.post('/notes', function(req, res) {
+/*app.post('/reservation', function(req, res) {
     const note = new Note({
         author: req.body.author,
         dateTimeStart: req.body.dateTimeStart,
@@ -61,14 +59,13 @@ app.post('/notes', function(req, res) {
         return res.statusCode = 400;
     });
 
-});
-
-/*app.post('/notes', function (req, res) {
-    db.createNote(req.body).then(data => res.send(data)).reject(res.statusCode = 400);
 });*/
 
+app.post('/reservation/', function (req, res) {
+    db.createNote(req.body).then(data => res.send(data)).reject(res.statusCode = 400);
+});
 
-app.delete('/notes/:id', (req, res) => {
+app.delete('/reservation/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));
 });
 

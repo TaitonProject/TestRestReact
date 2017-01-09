@@ -3,69 +3,64 @@ import DateTime from '../../node_modules/grommet/components/DateTime';
 import Form from '../../node_modules/grommet/components/Form';
 import FormFiled from '../../node_modules/grommet/components/FormField';
 import Button from '../../node_modules/grommet/components/Button';
-import TextInput from '../../node_modules/grommet/components/TextInput';
-
+import Select from '../../node_modules/grommet/components/Select';
 
 const NoteEditor = React.createClass({
     getInitialState() {
         return {
-            author: '',
-            dateTimeStart: '',
-            dateTimeEnd: ''
+            employee: '',
+            requestedTime: '',
+            durationTime: '',
         };
     },
 
-    handleAuthorChange(event) {
-        this.setState({ author: event.target.value });
+    handleSelectChange(event) {
+        this.setState({value: event.target.value});
     },
 
     handleDateTimeStartChange(event) {
-        this.setState({ dateTimeStart: event.target.value });
+        this.props.getListByDate(this.state.requestedTime);
+        this.setState({ requestedTime: event.target.value });
     },
 
     handleDateTimeEndChange(event) {
-        this.setState({ dateTimeEnd: event.target.value });
+        this.setState({ durationTime: event.target.value });
     },
-
 
     handleNoteAdd() {
         const newNote = {
-            author: this.state.author,
-            dateTimeStart: this.state.dateTimeStart,
-            dateTimeEnd: this.state.dateTimeEnd
+            employee: this.state.employee,
+            dateTimeStart: this.state.requestedTime,
+            dateTimeEnd: this.state.durationTime
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ author: '', dateTimeStart: null , dateTimeEnd: null});
+        this.setState({ employee: '', requestedTime: null , durationTime: null});
     },
 
     render() {
         return (
-                <Form>
-                    <FormFiled
-                        <TextInput></TextInput>
-                        type='text'
-                        placeholder='Enter author'
-                        value={this.state.author}
-                        onChange={this.handleAuthorChange}>
-                    </FormFiled>
-                    <FormFiled>
-                        <DateTime
-                            value={this.state.dateTimeStart}
+                <div>
+                    <Select
+                        value={this.state.employee}
+                        onChange={this.handleSelectChange}
+                        options>
+                    </Select>
+                        <input
+                            type="time"
+                            value={this.state.requestedTime}
                             onChange={this.handleDateTimeStartChange}/>
-                    </FormFiled>
-                    <FormFiled>
-                        <DateTime
-                            value={this.state.dateTimeEnd}
+                        <input
+                            type="time"
+                            value={this.state.durationTime}
                             onChange={this.handleDateTimeEndChange}/>
-                    </FormFiled>
                     <Button
                         onClick={this.handleNoteAdd}
                         type='submit'
-                        label='Отправить'
+                        label='Ok'
                     >
                     </Button>
-                </Form>
+                </div>
         );
     }
 });

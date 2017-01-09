@@ -3,15 +3,31 @@ import axios from 'axios';
 import { apiPrefix } from '../../etc/config';
 
 export default {
-    listNotes() {
-        return axios.get(`${apiPrefix}/notes`);
+    listNotes(date) {
+        return axios.get(`${apiPrefix}/messagesList.json/${date}`);
     },
 
     createNote(data) {
-        return axios.post(`${apiPrefix}/notes`, data);
+        return axios.post(`${apiPrefix}/addMessage`, data);
     },
 
-    deleteNote(noteId) {
-        return axios.delete(`${apiPrefix}/notes/${noteId}`);
+    deleteNote(id) {
+        return axios.delete(`${apiPrefix}/delMessage/${id}`);
+    },
+
+    listEmployees(){
+        return axios.get(`${apiPrefix}/employeeList.json`);
     }
 }
+
+/*
+const myApi = axios.create({
+    baseURL: 'http://someUrl/someEndpoint',
+    timeout: 10000,
+    withCredentials: true,
+    transformRequest: [(data) => JSON.stringify(data.data)],
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
+});*/

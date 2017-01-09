@@ -3,17 +3,17 @@ import Constants from '../constants/AppConstants';
 
 import api from '../api';
 
-const NoteActions = {
-    loadNotes(date) {
+const EmployeeActions = {
+    loadEmployees() {
         AppDispatcher.dispatch({
             type: Constants.LOAD_NOTES_REQUEST
         });
 
-        api.listNotes(date)
+        api.listEmployees()
         .then(({ data }) =>
             AppDispatcher.dispatch({
                 type: Constants.LOAD_NOTES_SUCCESS,
-                notes: data
+                employees: data
             })
         )
         .catch(err =>
@@ -23,26 +23,6 @@ const NoteActions = {
             })
         );
     },
-
-    createNote(note) {
-        api.createNote(note)
-        .then(() =>
-            this.loadNotes()
-        )
-        .catch(err =>
-            console.error(err)
-        );
-    },
-
-    deleteNote(noteId) {
-        api.deleteNote(noteId)
-        .then(() =>
-            this.loadNotes()
-        )
-        .catch(err =>
-            console.error(err)
-        );
-    }
 };
 
-export default NoteActions;
+export default EmployeeActions;
