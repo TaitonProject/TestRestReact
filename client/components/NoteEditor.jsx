@@ -1,7 +1,10 @@
 import React from 'react';
+import DateTime from '../../node_modules/grommet/components/DateTime';
+import Form from '../../node_modules/grommet/components/Form';
+import FormFiled from '../../node_modules/grommet/components/FormField';
+import Button from '../../node_modules/grommet/components/Button';
+import TextInput from '../../node_modules/grommet/components/TextInput';
 
-
-import './NoteEditor.less';
 
 const NoteEditor = React.createClass({
     getInitialState() {
@@ -38,36 +41,31 @@ const NoteEditor = React.createClass({
 
     render() {
         return (
-            <div className='NoteEditor'>
-                <input
-                    type='text'
-                    className='NoteEditor__author'
-                    placeholder='Enter author'
-                    value={this.state.author}
-                    onChange={this.handleAuthorChange}
-                />
-                <input
-                    type="datetime-local"
-                    className="NoteEditor__dateTimeStart"
-                    value={this.state.dateTimeStart}
-                    onChange={this.handleDateTimeStartChange}
-                />
-                <input
-                    type="datetime-local"
-                    className="NoteEditor__dateTimeEnd"
-                    value={this.state.dateTimeEnd}
-                    onChange={this.handleDateTimeEndChange}
-                />
-                <div className='NoteEditor__footer'>
-                    <button
-                        className='NoteEditor__button'
-                        disabled={!this.state.author}
+                <Form>
+                    <FormFiled
+                        <TextInput></TextInput>
+                        type='text'
+                        placeholder='Enter author'
+                        value={this.state.author}
+                        onChange={this.handleAuthorChange}>
+                    </FormFiled>
+                    <FormFiled>
+                        <DateTime
+                            value={this.state.dateTimeStart}
+                            onChange={this.handleDateTimeStartChange}/>
+                    </FormFiled>
+                    <FormFiled>
+                        <DateTime
+                            value={this.state.dateTimeEnd}
+                            onChange={this.handleDateTimeEndChange}/>
+                    </FormFiled>
+                    <Button
                         onClick={this.handleNoteAdd}
+                        type='submit'
+                        label='Отправить'
                     >
-                        Add
-                    </button>
-                </div>
-            </div>
+                    </Button>
+                </Form>
         );
     }
 });
