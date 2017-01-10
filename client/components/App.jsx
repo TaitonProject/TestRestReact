@@ -31,6 +31,7 @@ const App = React.createClass({
         var date = moment(new Date()).format('YYYY-MM-DD');
         NotesActions.loadNotes(date);
         EmployeesActions.loadEmployees();
+        console.log(EmployeesActions.loadEmployees());
     },
 
     componentDidMount() {

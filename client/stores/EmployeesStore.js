@@ -11,8 +11,7 @@ let _isLoading = true;
 
 function formatEmployee(employee) {
     return {
-        id: employee.idEmployee,
-        name: employee.name
+        employee : employee.employee
     };
 }
 
