@@ -11,49 +11,58 @@ const NoteEditor = React.createClass({
             employee: '',
             requestedTime: '',
             durationTime: '',
+            requestedDate: ''
         };
     },
 
     handleSelectChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({employee: event.target.value});
     },
 
-    handleDateTimeStartChange(event) {
+    handleTimeStartChange(event) {
         this.props.getListByDate(this.state.requestedTime);
         this.setState({ requestedTime: event.target.value });
     },
 
-    handleDateTimeEndChange(event) {
+    handleTimeEndChange(event) {
         this.setState({ durationTime: event.target.value });
+    },
+
+    handleRequestedDateChange(event){
+        this.setState({ requestedDate: event.target.value})
     },
 
     handleNoteAdd() {
         const newNote = {
             employee: this.state.employee,
-            dateTimeStart: this.state.requestedTime,
-            dateTimeEnd: this.state.durationTime
+            requestedTime: this.state.requestedTime,
+            durationTime: this.state.durationTime,
+            requestedDate: this.state.requestedDate
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ employee: '', requestedTime: null , durationTime: null});
+        this.setState({ employee: null, requestedTime: null , durationTime: null, requestedDate: null});
     },
 
     render() {
         return (
                 <div>
                     <Select
-                        value={this.state.employee}
                         onChange={this.handleSelectChange}
-                        options>
-                    </Select>
+                        options={this.props.employees}
+                    />
+                    <input
+                        type="date"
+                        value={this.state.requestedDate}
+                        onChange={this.handleRequestedDateChange}/>
                         <input
                             type="time"
                             value={this.state.requestedTime}
-                            onChange={this.handleDateTimeStartChange}/>
+                            onChange={this.handleTimeStartChange}/>
                         <input
                             type="time"
                             value={this.state.durationTime}
-                            onChange={this.handleDateTimeEndChange}/>
+                            onChange={this.handleTimeEndChange}/>
                     <Button
                         onClick={this.handleNoteAdd}
                         type='submit'

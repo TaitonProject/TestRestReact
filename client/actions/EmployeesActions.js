@@ -6,19 +6,19 @@ import api from '../api';
 const EmployeeActions = {
     loadEmployees() {
         AppDispatcher.dispatch({
-            type: Constants.LOAD_NOTES_REQUEST
+            type: Constants.LOAD_EMPLOYEES_REQUEST
         });
 
         api.listEmployees()
         .then(({ data }) =>
             AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_SUCCESS,
+                type: Constants.LOAD_EMPLOYEES_SUCCESS,
                 employees: data
             })
         )
         .catch(err =>
             AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_FAIL,
+                type: Constants.LOAD_EMPLOYEES_FAIL,
                 error: err
             })
         );
