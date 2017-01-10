@@ -1,9 +1,7 @@
 import React from 'react';
-import DateTime from '../../node_modules/grommet/components/DateTime';
-import Form from '../../node_modules/grommet/components/Form';
-import FormFiled from '../../node_modules/grommet/components/FormField';
-import Button from '../../node_modules/grommet/components/Button';
-import Select from '../../node_modules/grommet/components/Select';
+import SelectField from '../../node_modules/material-ui/SelectField/SelectField';
+import MenuItem from '../../node_modules/material-ui/MenuItem/MenuItem';
+import RaisedButton from '../../node_modules/material-ui/RaisedButton/RaisedButton';
 
 const NoteEditor = React.createClass({
     getInitialState() {
@@ -13,6 +11,21 @@ const NoteEditor = React.createClass({
             durationTime: '',
             requestedDate: ''
         };
+    },
+
+    componentWillMount(){
+
+    },
+
+    componentDidMount(){
+        var select = document.getElementById("employeeSelect");
+        console.log(this.props.employees);
+        var a = ["aaa","bbb","aaa","bbb","aaa","bbb","aaa","bbb"];
+        for(var i=0; i < a.length; i++){
+            var newOption = document.createElement('option');
+            newOption.textContent = a[i];
+            select.appendChild(newOption);
+        }
     },
 
     handleSelectChange(event) {
@@ -30,7 +43,6 @@ const NoteEditor = React.createClass({
     handleRequestedDateChange(event){
         this.setState({ requestedDate: event.target.value});
         this.props.getListByDate(event.target.value);
-        console.log(event.target.value);
     },
 
     handleNoteAdd() {
@@ -42,20 +54,28 @@ const NoteEditor = React.createClass({
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ employee: null, requestedTime: null , durationTime: null, requestedDate: null});
+        this.setState({ employee: '', requestedTime: null , durationTime: null, requestedDate: null});
     },
 
+
+
     render() {
+        var data = this.props.employees;
+        console.log('tut ' + this.props.employees.map(function (item, index) {
+                return (
+                    <select key={index}>
+
+                    </select>
+                )
+            }));
         return (
                 <div>
-                    <Select
-                        onChange={this.handleSelectChange}
-                        options={this.props.employees}
-                    />
-                    <input
-                        type="date"
-                        value={this.state.requestedDate}
-                        onChange={this.handleRequestedDateChange}/>
+                        <select id="employeeSelect">
+                        </select>
+                        <input
+                            type="date"
+                            value={this.state.requestedDate}
+                            onChange={this.handleRequestedDateChange}/>
                         <input
                             type="time"
                             value={this.state.requestedTime}
@@ -64,12 +84,7 @@ const NoteEditor = React.createClass({
                             type="time"
                             value={this.state.durationTime}
                             onChange={this.handleTimeEndChange}/>
-                    <Button
-                        onClick={this.handleNoteAdd}
-                        type='submit'
-                        label='Ok'
-                    >
-                    </Button>
+                        <button onClick={this.handleNoteAdd}>Ok</button>
                 </div>
         );
     }
