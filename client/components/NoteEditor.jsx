@@ -52,13 +52,13 @@ const NoteEditor = React.createClass({
                     onChange={this.handleAuthorChange}
                 />
                 <input
-                    type="datetime-local"
+                    type="time"
                     className="NoteEditor__dateTimeStart"
                     value={this.state.dateTimeStart}
                     onChange={this.handleDateTimeStartChange}
                 />
                 <input
-                    type="datetime-local"
+                    type="time"
                     className="NoteEditor__dateTimeEnd"
                     value={this.state.dateTimeEnd}
                     onChange={this.handleDateTimeEndChange}

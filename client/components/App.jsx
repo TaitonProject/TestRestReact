@@ -3,6 +3,9 @@ import React from 'react';
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
 
+import EmployeesStore from '../stores/EmployeesStore';
+import EmployeesActions from '../actions/EmployeesActions';
+
 import NoteEditor from './NoteEditor.jsx';
 import NotesGrid from './NotesGrid.jsx';
 
@@ -11,7 +14,8 @@ import './App.less';
 function getStateFromFlux() {
     return {
         isLoading: NotesStore.isLoading(),
-        notes: NotesStore.getNotes()
+        notes: NotesStore.getNotes(),
+        employees: EmployeesStore.getEmployees()
     };
 }
 
@@ -22,14 +26,17 @@ const App = React.createClass({
 
     componentWillMount() {
         NotesActions.getListByDate(this._onChange);
+        EmployeesActions.getListEmployee(this._onChange);
     },
 
     componentDidMount() {
         NotesStore.addChangeListener(this._onChange);
+        EmployeesStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
         NotesStore.removeChangeListener(this._onChange);
+        EmployeesStore.removeChangeListener(this._onChange);
     },
 
     handleNoteDelete(note) {
@@ -48,7 +55,7 @@ const App = React.createClass({
         return (
             <div className='App'>
                 <h2 className='App__header'>NotesApp</h2>
-                <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleGetListByDate} />
+                <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleGetListByDate} employees={this.state.employees} />
                 <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
             </div>
         );

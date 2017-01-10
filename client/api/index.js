@@ -8,14 +8,18 @@ export default {
     },*/
 
     createNote(data) {
-        return axios.post(`${apiPrefix}/notes`, data);
+        return axios.post(`${apiPrefix}/addMessage`, data);
     },
 
     deleteNote(noteId) {
-        return axios.delete(`${apiPrefix}/notes/${noteId}`);
+        return axios.delete(`${apiPrefix}/delMessage/${noteId}`);
     },
 
     getListByDate(date){
-        return axios.get(`${apiPrefix}/notes`, date);
+        return axios.get(`${apiPrefix}/messagesList.json/${date}`);
+    },
+
+    getListEmployee(){
+        return axios.get(`${apiPrefix}/employeeList.json`)
     }
 }
