@@ -8,6 +8,7 @@ import Select from '../../node_modules/grommet/components/Select';
 const NoteEditor = React.createClass({
     getInitialState() {
         return {
+
             employee: '',
             requestedTime: '',
             durationTime: '',
@@ -20,7 +21,6 @@ const NoteEditor = React.createClass({
     },
 
     handleTimeStartChange(event) {
-        this.props.getListByDate(this.state.requestedTime);
         this.setState({ requestedTime: event.target.value });
     },
 
@@ -29,7 +29,12 @@ const NoteEditor = React.createClass({
     },
 
     handleRequestedDateChange(event){
-        this.setState({ requestedDate: event.target.value})
+        this.props.getListByDate(this.state.requestedDate);
+        console.log(this.state.requestedDate);
+        this.setState({ requestedDate: event.target.value});
+        console.log(event.target.value);
+
+
     },
 
     handleNoteAdd() {

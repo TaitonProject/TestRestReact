@@ -11,8 +11,8 @@ export default {
         return axios.post(`${apiPrefix}/addMessage`, data);
     },
 
-    deleteNote(id) {
-        return axios.delete(`${apiPrefix}/delMessage/${id}`);
+    deleteNote(idMessage) {
+        return axios.delete(`${apiPrefix}/delMessage/${idMessage}`);
     },
 
     listEmployees(){

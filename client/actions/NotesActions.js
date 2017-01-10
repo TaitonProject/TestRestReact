@@ -34,8 +34,8 @@ const NoteActions = {
         );
     },
 
-    deleteNote(noteId) {
-        api.deleteNote(noteId)
+    deleteNote(idMessage) {
+        api.deleteNote(idMessage)
         .then(() =>
             this.loadNotes()
         )

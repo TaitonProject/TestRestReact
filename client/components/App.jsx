@@ -44,7 +44,9 @@ const App = React.createClass({
     },
 
     handleNoteDelete(note) {
-        NotesActions.deleteNote(note.id);
+        console.log(note);
+        console.log(note.idMessage);
+        NotesActions.deleteNote(note.idMessage);
     },
 
     handleNoteAdd(noteData) {
@@ -52,6 +54,7 @@ const App = React.createClass({
     },
 
     handleChangeDateStart(date) {
+        console.log(date);
         NotesActions.loadNotes(date);
     },
 

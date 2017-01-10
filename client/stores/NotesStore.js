@@ -11,7 +11,7 @@ let _isLoading = true;
 
 function formatNote(note) {
     return {
-        id: note.idEmployee,
+        idMessage: note.idMessage,
         employee: note.employee,
         requestedDate: note.requestedDate,
         durationTime: note.durationTime,

@@ -9,7 +9,7 @@ const NotesGrid = React.createClass({
     render() {
         const masonryOptions = {
             itemSelector: '.Note',
-            columnWidth: 250,
+            columnWidth: 500,
             gutter: 10,
             isFitWidth: true
         };
@@ -22,7 +22,7 @@ const NotesGrid = React.createClass({
                 {
                     this.props.notes.map(note =>
                         <Note
-                            key={note.id}
+                            key={note.idMessage}
                             onDelete={this.props.onNoteDelete.bind(null, note)}
                             employee={note.employee}
                             requestedTime={note.requestedTime}
