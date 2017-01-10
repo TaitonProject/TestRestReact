@@ -44,8 +44,6 @@ const App = React.createClass({
     },
 
     handleNoteDelete(note) {
-        console.log(note);
-        console.log(note.idMessage);
         NotesActions.deleteNote(note.idMessage);
     },
 
