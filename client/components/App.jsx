@@ -5,9 +5,6 @@ import moment from 'moment';
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
 
-import EmployeesStore from '../stores/EmployeesStore';
-import EmployeesActions from '../actions/EmployeesActions';
-
 import NoteEditor from './NoteEditor.jsx';
 import NotesGrid from './NotesGrid.jsx';
 
@@ -15,10 +12,10 @@ import './App.less';
 
 function getStateFromFlux() {
     return {
-        isLoadingNotes: NotesStore.isLoading(),
-        isLoadingEmployees: EmployeesStore.isLoading(),
+        isLoadingNotes: NotesStore.isLoadingNote(),
+        isLoadingEmployees: NotesStore.isLoadingEmployee(),
         notes: NotesStore.getNotes(),
-        employees: EmployeesStore.getEmployees()
+        employees: NotesStore.getEmployees()
     };
 }
 
@@ -30,17 +27,17 @@ const App = React.createClass({
     componentWillMount() {
         var date = moment(new Date()).format('YYYY-MM-DD');
         NotesActions.loadNotes(date);
-        EmployeesActions.loadEmployees();
+        NotesActions.loadEmployees();
     },
 
     componentDidMount() {
         NotesStore.addChangeListener(this._onChange);
-        EmployeesStore.addChangeListener(this._onChange);
+        NotesActions.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
         NotesStore.removeChangeListener(this._onChange);
-        EmployeesStore.removeChangeListener(this._onChange);
+        NotesActions.removeChangeListener(this._onChange);
     },
 
     handleNoteDelete(note) {

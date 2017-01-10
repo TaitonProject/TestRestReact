@@ -44,7 +44,8 @@ const NoteEditor = React.createClass({
                     <Select
                         value={this.state.employee}
                         onChange={this.handleSelectChange}
-                        options>
+                        options={this.props.employees}
+                    >
                     </Select>
                         <input
                             type="time"
@@ -54,12 +55,13 @@ const NoteEditor = React.createClass({
                             type="time"
                             value={this.state.durationTime}
                             onChange={this.handleDateTimeEndChange}/>
-                    <Button
+                    <button
                         onClick={this.handleNoteAdd}
                         type='submit'
-                        label='Ok'
+
                     >
-                    </Button>
+                        Ok
+                    </button>
                 </div>
         );
     }
