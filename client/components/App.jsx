@@ -1,55 +1,52 @@
 import React from 'react';
-
+import api from '../api';
 import moment from 'moment';
-
-import NotesStore from '../stores/NotesStore';
-import NotesActions from '../actions/NotesActions';
 
 import NoteEditor from './NoteEditor.jsx';
 import NotesGrid from './NotesGrid.jsx';
 
 import './App.less';
 
-function getStateFromFlux() {
-    return {
-        isLoadingNotes: NotesStore.isLoadingNote(),
-        isLoadingEmployees: NotesStore.isLoadingEmployee(),
-        notes: NotesStore.getNotes(),
-        employees: NotesStore.getEmployees()
-    };
-}
-
 const App = React.createClass({
+
+    getDefaultProps: function(){
+        return{
+
+        };
+    },
+
     getInitialState() {
-        return getStateFromFlux();
+        return {
+            notes: [],
+            employees: []
+        }
     },
 
     componentWillMount() {
         var date = moment(new Date()).format('YYYY-MM-DD');
-        NotesActions.loadNotes(date);
-        NotesActions.loadEmployees();
+            props.notes = api.listNotes(date)
+            props.employees = api.listEmployees()
+
     },
 
     componentDidMount() {
-        NotesStore.addChangeListener(this._onChange);
-        NotesActions.addChangeListener(this._onChange);
+
     },
 
     componentWillUnmount() {
-        NotesStore.removeChangeListener(this._onChange);
-        NotesActions.removeChangeListener(this._onChange);
+
     },
 
     handleNoteDelete(note) {
-        NotesActions.deleteNote(note.id);
+        api.deleteNote(note.id);
     },
 
     handleNoteAdd(noteData) {
-        NotesActions.createNote(noteData);
+        api.createNote(noteData);
     },
 
     handleChangeDateStart(date) {
-        NotesActions.loadNotes(date);
+        api.listNotes(date);
     },
 
     render() {
