@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import Constants from '../constants/AppConstants';
+import Constants from '../constants/AppNoteConstants';
 
 import moment from 'moment';
 
@@ -12,40 +12,46 @@ const NoteActions = {
             type: Constants.LOAD_NOTES_REQUEST
         });
         var dateTrue = moment(date).format('YYYY-MM-DD');
-        console.log(dateTrue);
         api.listNotes(dateTrue)
-        .then(({ data }) =>
-            AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_SUCCESS,
-                notes: data
-            })
-        )
-        .catch(err =>
-            AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_FAIL,
-                error: err
-            })
-        );
+            .then(({data}) =>
+                AppDispatcher.dispatch({
+                    type: Constants.LOAD_NOTES_SUCCESS,
+                    notes: data
+                })
+            )
+            .catch(err =>
+                AppDispatcher.dispatch({
+                    type: Constants.LOAD_NOTES_FAIL,
+                    error: err
+                })
+            );
     },
 
     createNote(note, date) {
-        api.createNote(note)
-        .then(() =>
-            this.loadNotes(date)
-        )
-        .catch(err =>
-            console.error(err)
-        );
+        var newNote = {
+            employee: note.employee,
+            requestedTime: moment(note.requestedTime).format('HH:mm'),
+            durationTime: moment(note.durationTime).format('HH:mm'),
+            requestedDate: moment(note.requestedDate).format('YYYY-MM-DD')
+        };
+
+        api.createNote(newNote)
+            .then(() =>
+                this.loadNotes(date)
+            )
+            .catch(err =>
+                console.error(err)
+            );
     },
 
     deleteNote(idMessage, date) {
         api.deleteNote(idMessage)
-        .then(() =>
-            this.loadNotes(date)
-        )
-        .catch(err =>
-            console.error(err)
-        );
+            .then(() =>
+                this.loadNotes(date)
+            )
+            .catch(err =>
+                console.error(err)
+            );
     }
 };
 

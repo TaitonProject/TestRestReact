@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import Constants from '../constants/AppConstants';
+import Constants from '../constants/AppEmployeeConstants';
 
 import api from '../api';
 
@@ -10,18 +10,18 @@ const EmployeeActions = {
         });
 
         api.listEmployees()
-        .then(({ data }) =>
-            AppDispatcher.dispatch({
-                type: Constants.LOAD_EMPLOYEES_SUCCESS,
-                employees: data
-            })
-        )
-        .catch(err =>
-            AppDispatcher.dispatch({
-                type: Constants.LOAD_EMPLOYEES_FAIL,
-                error: err
-            })
-        );
+            .then(({data}) =>
+                AppDispatcher.dispatch({
+                    type: Constants.LOAD_EMPLOYEES_SUCCESS,
+                    employees: data
+                })
+            )
+            .catch(err =>
+                AppDispatcher.dispatch({
+                    type: Constants.LOAD_EMPLOYEES_FAIL,
+                    error: err
+                })
+            );
     },
 };
 

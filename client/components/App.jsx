@@ -38,8 +38,6 @@ const App = React.createClass({
     },
 
     componentDidMount() {
-
-
         NotesStore.addChangeListener(this._onChange);
         EmployeesStore.addChangeListener(this._onChange);
 
@@ -50,16 +48,15 @@ const App = React.createClass({
         EmployeesStore.removeChangeListener(this._onChange);
     },
 
-    handleNoteDelete(note) {
-        NotesActions.deleteNote(note.idMessage);
+    handleNoteDelete(note, date) {
+        NotesActions.deleteNote(note.idMessage, date);
     },
 
-    handleNoteAdd(noteData) {
-        NotesActions.createNote(noteData);
+    handleNoteAdd(noteData, date) {
+        NotesActions.createNote(noteData, date);
     },
 
     handleChangeDateStart(date) {
-        console.log(date);
         NotesActions.loadNotes(date);
     },
 
@@ -67,9 +64,10 @@ const App = React.createClass({
         return (
             <MuiThemeProvider>
                 <div className='App'>
-                    <h2 className='App__header'>Бронирование конференц-зала</h2>
-                    <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart} employees={this.state.employees}/>
-                    <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
+                    <h2>Бронирование конференц-зала</h2>
+                    <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
+                                employees={this.state.employees}/>
+                    <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
                 </div>
             </MuiThemeProvider>
         );

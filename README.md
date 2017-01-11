@@ -945,7 +945,7 @@ Actions — хелперы, упрощающие передачу данных �
 
 Объявление констант:
 
-**client/constants/AppConstants.js**
+**client/constants/AppNoteConstants.js**
 ```
 import keyMirror from 'keymirror';
 
