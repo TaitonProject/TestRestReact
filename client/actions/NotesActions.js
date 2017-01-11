@@ -28,7 +28,7 @@ const NoteActions = {
         );
     },
 
-    createNote(note) {
+    createNote(note, date) {
         api.createNote(note)
         .then(() =>
             this.loadNotes(date)
@@ -38,7 +38,7 @@ const NoteActions = {
         );
     },
 
-    deleteNote(idMessage) {
+    deleteNote(idMessage, date) {
         api.deleteNote(idMessage)
         .then(() =>
             this.loadNotes(date)

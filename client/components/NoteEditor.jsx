@@ -3,16 +3,17 @@ import SelectField from '../../node_modules/material-ui/SelectField/SelectField'
 import MenuItem from '../../node_modules/material-ui/MenuItem/MenuItem';
 import RaisedButton from '../../node_modules/material-ui/RaisedButton/RaisedButton';
 import DatePicker from '../../node_modules/material-ui/DatePicker/DatePicker';
-import moment from 'moment';
 
+import TimePicker from '../../node_modules/material-ui/TimePicker/TimePicker';
 
 const NoteEditor = React.createClass({
+
     getInitialState() {
         return {
             employee: '',
             requestedTime: '',
             durationTime: '',
-            requestedDate: null
+            requestedDate: new Date()
         };
     },
 
@@ -21,17 +22,20 @@ const NoteEditor = React.createClass({
     },
 
 
+    handleSelectChange(event, index, value) {
+        console.log(value);
 
-    handleSelectChange(event) {
-        this.setState({employee: event.target.value});
+        this.setState({employee: value});
     },
 
-    handleTimeStartChange(event) {
-        this.setState({ requestedTime: event.target.value });
+    handleTimeStartChange(event, time) {
+        console.log(time);
+        this.setState({ requestedTime: time });
     },
 
-    handleTimeEndChange(event) {
-        this.setState({ durationTime: event.target.value });
+    handleTimeEndChange(event, time) {
+        console.log(time);
+        this.setState({ durationTime: time });
     },
 
     handleRequestedDateChange(event, date){
@@ -50,7 +54,7 @@ const NoteEditor = React.createClass({
         };
 
         this.props.onNoteAdd(newNote);
-        this.setState({ employee: '', requestedTime: null , durationTime: null, requestedDate: null});
+        this.setState({employee: '', requestedTime: null , durationTime: null, requestedDate: null});
     },
 
     render() {
@@ -59,20 +63,17 @@ const NoteEditor = React.createClass({
                 <div>
                         <SelectField
                             value={this.state.employee}
-                            onChange={this.handleSelectChange}
-                        >
+                            onChange={this.handleSelectChange}>
                             {
                                 this.props.employees.map(em =>
                                     <MenuItem
-                                        key={em.employee}
-                                        employee={em.employee}
-                                        primaryText={`Item ${em.employee}`}
+                                        key={em.id}
+                                        value={em.id}
+                                        primaryText={`Сотрудник ${em.name}` + ` ${em.id}`}
                                     >
-
                                     </MenuItem>
                                 )
                             }
-
                         </SelectField>
 
                         <DatePicker
@@ -84,15 +85,24 @@ const NoteEditor = React.createClass({
                             onChange={this.handleRequestedDateChange}
                         />
 
-                        <input
-                            type="time"
-                            value={this.state.requestedTime}
-                            onChange={this.handleTimeStartChange}/>
-                        <input
-                            type="time"
-                            value={this.state.durationTime}
-                            onChange={this.handleTimeEndChange}/>
-                        <button onClick={this.handleNoteAdd}>Ok</button>
+                        <TimePicker
+                            format="24hr"
+                            hintText="24hr Format"
+                            onChange={this.handleTimeStartChange}
+                        />
+
+                        <TimePicker
+                            format="24hr"
+                            hintText="24hr Format"
+                            onChange={this.handleTimeEndChange}
+                        />
+
+                    <RaisedButton
+                        type="submit"
+                        label="Отправить"
+                        primary={true}
+                        onClick={this.handleNoteAdd}
+                    />
                 </div>
         );
     }

@@ -67,7 +67,7 @@ const App = React.createClass({
         return (
             <MuiThemeProvider>
                 <div className='App'>
-                    <h2 className='App__header'>NotesApp</h2>
+                    <h2 className='App__header'>Бронирование конференц-зала</h2>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart} employees={this.state.employees}/>
                     <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
                 </div>
