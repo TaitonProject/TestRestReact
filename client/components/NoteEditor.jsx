@@ -4,6 +4,7 @@ import MenuItem from '../../node_modules/material-ui/MenuItem/MenuItem';
 import RaisedButton from '../../node_modules/material-ui/RaisedButton/RaisedButton';
 import DatePicker from '../../node_modules/material-ui/DatePicker/DatePicker';
 
+
 import TimePicker from '../../node_modules/material-ui/TimePicker/TimePicker';
 
 const NoteEditor = React.createClass({
@@ -11,8 +12,8 @@ const NoteEditor = React.createClass({
     getInitialState() {
         return {
             employee: '',
-            requestedTime: '',
-            durationTime: '',
+            requestedTime: null,
+            durationTime: null,
             requestedDate: new Date()
         };
     },
@@ -70,8 +71,8 @@ const NoteEditor = React.createClass({
 
                 <DatePicker
                     hintText="Выберите дату"
-                    okLabel="OK"
-                    cancelLabel="Cancelar"
+                    okLabel="Выбрать"
+                    cancelLabel="Отмена"
                     autoOk={true}
                     defaultDate={new Date()}
                     onChange={this.handleRequestedDateChange}
@@ -79,13 +80,15 @@ const NoteEditor = React.createClass({
 
                 <TimePicker
                     format="24hr"
-                    hintText="24hr Format"
+                    hintText="Время начала"
+                    value={this.state.requestedTime}
                     onChange={this.handleTimeStartChange}
                 />
 
                 <TimePicker
                     format="24hr"
-                    hintText="24hr Format"
+                    hintText="Время окончания"
+                    value={this.state.durationTime}
                     onChange={this.handleTimeEndChange}
                 />
 
