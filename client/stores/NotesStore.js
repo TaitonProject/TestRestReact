@@ -19,7 +19,7 @@ function formatNote(note) {
     };
 }
 
-const TasksStore = Object.assign({}, EventEmitter.prototype, {
+const NoteStore = Object.assign({}, EventEmitter.prototype, {
     isLoading() {
         return _isLoading;
     },
@@ -46,7 +46,7 @@ AppDispatcher.register(function (action) {
         case AppConstants.LOAD_NOTES_REQUEST: {
             console.log('LOAD_NOTES_REQUEST - note');
             _isLoading = true;
-            TasksStore.emitChange();
+            NoteStore.emitChange();
             break;
         }
 
@@ -55,14 +55,14 @@ AppDispatcher.register(function (action) {
             _isLoading = false;
             _notes = action.notes.map(formatNote);
             _loadingError = null;
-            TasksStore.emitChange();
+            NoteStore.emitChange();
             break;
         }
 
         case AppConstants.LOAD_NOTES_FAIL: {
             console.log('LOAD_NOTES_FAIL - note');
             _loadingError = action.error;
-            TasksStore.emitChange();
+            NoteStore.emitChange();
             break;
         }
 
@@ -72,4 +72,4 @@ AppDispatcher.register(function (action) {
     }
 });
 
-export default TasksStore;
+export default NoteStore;

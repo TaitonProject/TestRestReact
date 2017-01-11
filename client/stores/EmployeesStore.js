@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
 
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import AppConstants from '../constants/AppNoteConstants';
+import AppConstants from '../constants/AppEmployeeConstants';
 
 const CHANGE_EVENT = 'change';
 
@@ -16,7 +16,7 @@ function formatEmployee(employee) {
     };
 }
 
-const TasksStore = Object.assign({}, EventEmitter.prototype, {
+const EmployeeStore = Object.assign({}, EventEmitter.prototype, {
     isLoading() {
         return _isLoading;
     },
@@ -44,7 +44,7 @@ AppDispatcher.register(function (action) {
             console.log('LOAD_EMPLOYEES_REQUEST - employee');
 
             _isLoading = true;
-            TasksStore.emitChange();
+            EmployeeStore.emitChange();
             break;
         }
 
@@ -53,14 +53,14 @@ AppDispatcher.register(function (action) {
             _isLoading = false;
             _employees = action.employees.map(formatEmployee);
             _loadingError = null;
-            TasksStore.emitChange();
+            EmployeeStore.emitChange();
             break;
         }
 
         case AppConstants.LOAD_EMPLOYEES_FAIL: {
             console.log('LOAD_EMPLOYEES_FAIL - employee');
             _loadingError = action.error;
-            TasksStore.emitChange();
+            EmployeeStore.emitChange();
             break;
         }
 
@@ -70,4 +70,4 @@ AppDispatcher.register(function (action) {
     }
 });
 
-export default TasksStore;
+export default EmployeeStore;
