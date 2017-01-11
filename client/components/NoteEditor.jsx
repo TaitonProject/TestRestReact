@@ -2,6 +2,9 @@ import React from 'react';
 import SelectField from '../../node_modules/material-ui/SelectField/SelectField';
 import MenuItem from '../../node_modules/material-ui/MenuItem/MenuItem';
 import RaisedButton from '../../node_modules/material-ui/RaisedButton/RaisedButton';
+import DatePicker from '../../node_modules/material-ui/DatePicker/DatePicker';
+import moment from 'moment';
+
 
 const NoteEditor = React.createClass({
     getInitialState() {
@@ -9,7 +12,7 @@ const NoteEditor = React.createClass({
             employee: '',
             requestedTime: '',
             durationTime: '',
-            requestedDate: ''
+            requestedDate: null
         };
     },
 
@@ -17,16 +20,7 @@ const NoteEditor = React.createClass({
 
     },
 
-    componentDidMount(){
-        var select = document.getElementById("employeeSelect");
-        console.log(this.props.employees);
-        var a = ["aaa","bbb","aaa","bbb","aaa","bbb","aaa","bbb"];
-        for(var i=0; i < a.length; i++){
-            var newOption = document.createElement('option');
-            newOption.textContent = a[i];
-            select.appendChild(newOption);
-        }
-    },
+
 
     handleSelectChange(event) {
         this.setState({employee: event.target.value});
@@ -40,9 +34,11 @@ const NoteEditor = React.createClass({
         this.setState({ durationTime: event.target.value });
     },
 
-    handleRequestedDateChange(event){
-        this.setState({ requestedDate: event.target.value});
-        this.props.getListByDate(event.target.value);
+    handleRequestedDateChange(event, date){
+        /*var dateTrueFormat = moment(date).format('YYYY-MM-DD');*/
+        console.log(date);
+        this.setState({ requestedDate: date});
+        this.props.getListByDate(date);
     },
 
     handleNoteAdd() {
@@ -57,25 +53,37 @@ const NoteEditor = React.createClass({
         this.setState({ employee: '', requestedTime: null , durationTime: null, requestedDate: null});
     },
 
-
-
     render() {
-        var data = this.props.employees;
-        console.log('tut ' + this.props.employees.map(function (item, index) {
-                return (
-                    <select key={index}>
-
-                    </select>
-                )
-            }));
+        console.log('tut ' + this.props.employees);
         return (
                 <div>
-                        <select id="employeeSelect">
-                        </select>
-                        <input
-                            type="date"
-                            value={this.state.requestedDate}
-                            onChange={this.handleRequestedDateChange}/>
+                        <SelectField
+                            value={this.state.employee}
+                            onChange={this.handleSelectChange}
+                        >
+                            {
+                                this.props.employees.map(em =>
+                                    <MenuItem
+                                        key={em.employee}
+                                        employee={em.employee}
+                                        primaryText={`Item ${em.employee}`}
+                                    >
+
+                                    </MenuItem>
+                                )
+                            }
+
+                        </SelectField>
+
+                        <DatePicker
+                            hintText="Выберите дату"
+                            okLabel="OK"
+                            cancelLabel="Cancelar"
+                            autoOk={true}
+                            defaultDate={new Date()}
+                            onChange={this.handleRequestedDateChange}
+                        />
+
                         <input
                             type="time"
                             value={this.state.requestedTime}

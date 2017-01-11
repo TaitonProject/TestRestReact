@@ -2,9 +2,10 @@ import React from 'react';
 
 import './Note.less';
 
-import Timestamp from 'grommet/components/Timestamp';
+var injectTapEventPlugin = require("react-tap-event-plugin");
 
 const Note = React.createClass({
+
     render() {
 
         return (

@@ -3,9 +3,15 @@ import Note from './Note.jsx';
 
 import Masonry from 'react-masonry-component';
 
+var injectTapEventPlugin = require("react-tap-event-plugin");
+
 import './NotesGrid.less';
 
 const NotesGrid = React.createClass({
+
+    componentDidMount(){
+    },
+
     render() {
         const masonryOptions = {
             itemSelector: '.Note',

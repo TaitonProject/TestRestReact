@@ -2,6 +2,8 @@ import React from 'react';
 
 import moment from 'moment';
 
+import MuiThemeProvider from '../../node_modules/material-ui/styles/MuiThemeProvider';
+
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
 
@@ -11,6 +13,8 @@ import EmployeesActions from '../actions/EmployeesActions';
 import NoteEditor from './NoteEditor.jsx';
 import NotesGrid from './NotesGrid.jsx';
 
+var injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
 import './App.less';
 
 function getStateFromFlux() {
@@ -34,8 +38,11 @@ const App = React.createClass({
     },
 
     componentDidMount() {
+
+
         NotesStore.addChangeListener(this._onChange);
         EmployeesStore.addChangeListener(this._onChange);
+
     },
 
     componentWillUnmount() {
@@ -58,11 +65,13 @@ const App = React.createClass({
 
     render() {
         return (
-            <div className='App'>
-                <h2 className='App__header'>NotesApp</h2>
-                <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart} employees={this.state.employees}/>
-                <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
-            </div>
+            <MuiThemeProvider>
+                <div className='App'>
+                    <h2 className='App__header'>NotesApp</h2>
+                    <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart} employees={this.state.employees}/>
+                    <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
+                </div>
+            </MuiThemeProvider>
         );
     },
 

@@ -1,15 +1,19 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import Constants from '../constants/AppConstants';
 
+import moment from 'moment';
+
 import api from '../api';
 
 const NoteActions = {
     loadNotes(date) {
+
         AppDispatcher.dispatch({
             type: Constants.LOAD_NOTES_REQUEST
         });
-
-        api.listNotes(date)
+        var dateTrue = moment(date).format('YYYY-MM-DD');
+        console.log(dateTrue);
+        api.listNotes(dateTrue)
         .then(({ data }) =>
             AppDispatcher.dispatch({
                 type: Constants.LOAD_NOTES_SUCCESS,
