@@ -4,6 +4,8 @@ import moment from 'moment';
 
 import MuiThemeProvider from '../../node_modules/material-ui/styles/MuiThemeProvider';
 import CircularProgress from '../../node_modules/material-ui/CircularProgress/CircularProgress';
+import Dialog from '../../node_modules/material-ui/Dialog/Dialog';
+import FlatButton from '../../node_modules/material-ui/FlatButton/FlatButton';
 
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
@@ -44,7 +46,6 @@ const App = React.createClass({
     componentDidMount() {
         NotesStore.addChangeListener(this._onChange);
         EmployeesStore.addChangeListener(this._onChange);
-
     },
 
     componentWillUnmount() {
@@ -64,16 +65,34 @@ const App = React.createClass({
         NotesActions.loadNotes(date);
     },
 
-    handleChangeAddNoteErr(value){
-        NotesActions.
-        this.setState({addNoteError: value});
+    handleChangeAddNoteErr(){
+        this.setState({addNoteError: false});
     },
 
     render() {
+        const actions = [
+            <FlatButton
+                label="OK"
+                primary={true}
+                onTouchTap={this.handleChangeAddNoteErr}
+            />,
+        ];
+
         return (
             <MuiThemeProvider>
                 <div className='App'>
                     <h2 className="App__header">Бронирование конференц-зала</h2>
+                    <div>
+                        <Dialog
+                            actions={actions}
+                            modal={false}
+                            open={this.state.addNoteError}
+                            onRequestClose={this.handleChangeAddNoteErr}
+                        >
+                            Ошибка, добавить Вашу заявку не удалось.
+                            Проверьте введенные данные!
+                        </Dialog>
+                    </div>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}
                                 addNoteError={this.handleChangeAddNoteErr}/>

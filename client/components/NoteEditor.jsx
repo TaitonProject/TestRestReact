@@ -3,8 +3,7 @@ import SelectField from '../../node_modules/material-ui/SelectField/SelectField'
 import MenuItem from '../../node_modules/material-ui/MenuItem/MenuItem';
 import RaisedButton from '../../node_modules/material-ui/RaisedButton/RaisedButton';
 import DatePicker from '../../node_modules/material-ui/DatePicker/DatePicker';
-import Dialog from '../../node_modules/material-ui/Dialog/Dialog';
-import FlatButton from '../../node_modules/material-ui/FlatButton/FlatButton';
+
 
 
 import TimePicker from '../../node_modules/material-ui/TimePicker/TimePicker';
@@ -16,8 +15,7 @@ const NoteEditor = React.createClass({
             employee: '',
             requestedTime: null,
             durationTime: null,
-            requestedDate: new Date(),
-            open: false
+            requestedDate: new Date()
         };
     },
 
@@ -54,41 +52,10 @@ const NoteEditor = React.createClass({
         this.setState({employee: '', requestedTime: null, durationTime: null, requestedDate: null});
     },
 
-    handleOpen(){
-
-    },
-
-    handleClose (){
-
-    },
 
     render() {
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Discard"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
-        ];
-
         return (
             <div>
-                <div>
-                    <Dialog
-                        actions={actions}
-                        modal={false}
-                        open={this.props.addNoteError}
-                        onRequestClose={!this.props.addNoteError}
-                    >
-                        Discard draft?
-                    </Dialog>
-                </div>
-
                 <SelectField
                     hintText="Выберите профиль"
                     value={this.state.employee}
