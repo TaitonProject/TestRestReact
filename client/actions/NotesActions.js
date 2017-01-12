@@ -41,7 +41,8 @@ const NoteActions = {
                 this.loadNotes(newNote.requestedDate)
             )
             .catch(err =>
-                console.error(err)
+                (alert('Проверьте введенные данные!'),
+                console.error(err))
             );
     },
 

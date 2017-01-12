@@ -75,7 +75,7 @@ const NoteEditor = React.createClass({
                     okLabel="Выбрать"
                     cancelLabel="Отмена"
                     autoOk={true}
-                    defaultDate={new Date()}
+                    value={this.state.requestedDate}
                     onChange={this.handleRequestedDateChange}
                 />
 

@@ -41,15 +41,12 @@ const EmployeeStore = Object.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (action) {
     switch (action.type) {
         case AppConstants.LOAD_EMPLOYEES_REQUEST: {
-            console.log('LOAD_EMPLOYEES_REQUEST - employee');
-
             _isLoading = true;
             EmployeeStore.emitChange();
             break;
         }
 
         case AppConstants.LOAD_EMPLOYEES_SUCCESS: {
-            console.log('LOAD_EMPLOYEES_SUCCESS - employee');
             _isLoading = false;
             _employees = action.employees.map(formatEmployee);
             _loadingError = null;
@@ -58,7 +55,6 @@ AppDispatcher.register(function (action) {
         }
 
         case AppConstants.LOAD_EMPLOYEES_FAIL: {
-            console.log('LOAD_EMPLOYEES_FAIL - employee');
             _loadingError = action.error;
             EmployeeStore.emitChange();
             break;
