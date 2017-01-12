@@ -49,12 +49,12 @@ const App = React.createClass({
         EmployeesStore.removeChangeListener(this._onChange);
     },
 
-    handleNoteDelete(note, date) {
-        NotesActions.deleteNote(note.idMessage, date);
+    handleNoteDelete(note) {
+        NotesActions.deleteNote(note);
     },
 
-    handleNoteAdd(noteData, date) {
-        NotesActions.createNote(noteData, date);
+    handleNoteAdd(noteData) {
+        NotesActions.createNote(noteData);
     },
 
     handleChangeDateStart(date) {
@@ -68,12 +68,9 @@ const App = React.createClass({
                     <h2>Бронирование конференц-зала</h2>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}/>
-                    {this.state.isLoadingNotes
-                        ?
-                        <CircularProgress size={80} thickness={5}/>
-                        :
-                        <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
-                    }
+
+                    <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
+
                 </div>
             </MuiThemeProvider>
         );

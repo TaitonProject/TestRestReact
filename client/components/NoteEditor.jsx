@@ -53,7 +53,7 @@ const NoteEditor = React.createClass({
 
     render() {
         return (
-            <form>
+            <div>
                 <SelectField
                     value={this.state.employee}
                     onChange={this.handleSelectChange}>
@@ -98,7 +98,7 @@ const NoteEditor = React.createClass({
                     primary={true}
                     onClick={this.handleNoteAdd}
                 />
-            </form>
+            </div>
         );
     }
 });
