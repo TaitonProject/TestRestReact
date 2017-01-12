@@ -25,6 +25,7 @@ const NotesGrid = React.createClass({
                 options={masonryOptions}
             >
                 {
+                    (this.props.notes.length != 0) ?
                     this.props.notes.map(note =>
                         <Note
                             key={note.idMessage}
@@ -35,6 +36,8 @@ const NotesGrid = React.createClass({
                         >
                         </Note>
                     )
+                        :
+                        <h1>Нет записей</h1>
                 }
             </Masonry>
         );

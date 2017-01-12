@@ -44,14 +44,12 @@ const NoteStore = Object.assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (action) {
     switch (action.type) {
         case AppConstants.LOAD_NOTES_REQUEST: {
-            console.log('LOAD_NOTES_REQUEST - note');
             _isLoading = true;
             NoteStore.emitChange();
             break;
         }
 
         case AppConstants.LOAD_NOTES_SUCCESS: {
-            console.log('LOAD_NOTES_SUCCESS - note');
             _isLoading = false;
             _notes = action.notes.map(formatNote);
             _loadingError = null;
@@ -60,7 +58,6 @@ AppDispatcher.register(function (action) {
         }
 
         case AppConstants.LOAD_NOTES_FAIL: {
-            console.log('LOAD_NOTES_FAIL - note');
             _loadingError = action.error;
             NoteStore.emitChange();
             break;

@@ -69,7 +69,12 @@ const App = React.createClass({
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}/>
 
-                    <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
+                    {
+                        (!this.state.isLoadingNotes ?
+                            <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
+                            :
+                            <CircularProgress size={80} thickness={5} />)
+                    }
 
                 </div>
             </MuiThemeProvider>

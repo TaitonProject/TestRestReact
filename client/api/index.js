@@ -19,15 +19,3 @@ export default {
         return axios.get(`${apiPrefix}/employeeList.json`);
     }
 }
-
-/*
-const myApi = axios.create({
-    baseURL: 'http://someUrl/someEndpoint',
-    timeout: 10000,
-    withCredentials: true,
-    transformRequest: [(data) => JSON.stringify(data.data)],
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
-});*/
