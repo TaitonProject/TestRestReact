@@ -35,7 +35,6 @@ const NoteActions = {
             requestedDate: moment(note.requestedDate).format('YYYY-MM-DD')
         };
 
-        console.log(note.requestedDate);
         api.createNote(newNote)
             .then(() =>
                 this.loadNotes(newNote.requestedDate)

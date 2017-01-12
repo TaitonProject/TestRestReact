@@ -9,8 +9,6 @@ import './NotesGrid.less';
 
 const NotesGrid = React.createClass({
 
-    componentDidMount(){
-    },
 
     render() {
         const masonryOptions = {
@@ -37,7 +35,7 @@ const NotesGrid = React.createClass({
                         </Note>
                     )
                         :
-                        <h1>Нет записей</h1>
+                        <h2>Нет записей</h2>
                 }
             </Masonry>
         );

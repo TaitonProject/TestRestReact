@@ -29,7 +29,9 @@ function getStateFromFlux() {
 
 const App = React.createClass({
     getInitialState() {
-        return getStateFromFlux();
+        return (
+            getStateFromFlux()
+        );
     },
 
     componentWillMount() {
@@ -65,17 +67,15 @@ const App = React.createClass({
         return (
             <MuiThemeProvider>
                 <div className='App'>
-                    <h2>Бронирование конференц-зала</h2>
+                    <h2 className="App__header">Бронирование конференц-зала</h2>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}/>
-
                     {
                         (!this.state.isLoadingNotes ?
                             <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
                             :
                             <CircularProgress size={80} thickness={5} />)
                     }
-
                 </div>
             </MuiThemeProvider>
         );

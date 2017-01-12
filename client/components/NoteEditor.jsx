@@ -94,6 +94,7 @@ const NoteEditor = React.createClass({
                 />
 
                 <RaisedButton
+                    className="NoteEditor__button"
                     type="submit"
                     label="Отправить"
                     primary={true}
