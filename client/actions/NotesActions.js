@@ -37,11 +37,17 @@ const NoteActions = {
 
         api.createNote(newNote)
             .then(() =>
+                AppDispatcher.dispatch({
+                    type: Constants.ADD_NOTE_SUCCESS
+                }),
                 this.loadNotes(newNote.requestedDate)
             )
             .catch(err =>
-                (alert('Проверьте введенные данные!'),
-                console.error(err))
+                AppDispatcher.dispatch({
+                    type: Constants.ADD_NOTE_FAIL,
+                    error: err
+                },
+                    console.log(err))
             );
     },
 

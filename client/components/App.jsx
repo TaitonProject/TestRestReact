@@ -23,7 +23,8 @@ function getStateFromFlux() {
         isLoadingNotes: NotesStore.isLoading(),
         isLoadingEmployees: EmployeesStore.isLoading(),
         notes: NotesStore.getNotes(),
-        employees: EmployeesStore.getEmployees()
+        employees: EmployeesStore.getEmployees(),
+        addNoteError: NotesStore.getNoteError()
     };
 }
 
@@ -69,7 +70,8 @@ const App = React.createClass({
                 <div className='App'>
                     <h2 className="App__header">Бронирование конференц-зала</h2>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
-                                employees={this.state.employees}/>
+                                employees={this.state.employees}
+                                addNoteError={this.state.addNoteError}/>
                     {
                         (!this.state.isLoadingNotes ?
                             <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>

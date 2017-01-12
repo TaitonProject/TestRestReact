@@ -8,6 +8,7 @@ const CHANGE_EVENT = 'change';
 let _notes = [];
 let _loadingError = null;
 let _isLoading = true;
+let _addNoteError = false;
 
 function formatNote(note) {
     return {
@@ -26,6 +27,10 @@ const NoteStore = Object.assign({}, EventEmitter.prototype, {
 
     getNotes() {
         return _notes;
+    },
+
+    getNoteError(){
+        return _addNoteError;
     },
 
     emitChange: function () {
@@ -59,6 +64,18 @@ AppDispatcher.register(function (action) {
 
         case AppConstants.LOAD_NOTES_FAIL: {
             _loadingError = action.error;
+            NoteStore.emitChange();
+            break;
+        }
+
+        case AppConstants.ADD_NOTE_SUCCESS:{
+            _addNoteError = false;
+            NoteStore.emitChange();
+            break;
+        }
+
+        case AppConstants.ADD_NOTE_FAIL:{
+            _addNoteError = true;
             NoteStore.emitChange();
             break;
         }
