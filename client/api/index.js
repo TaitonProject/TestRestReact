@@ -3,15 +3,15 @@ import axios from 'axios';
 import { apiPrefix } from '../../etc/config';
 
 export default {
-    listNotes(date) {
+    listStatements(date) {
         return axios.get(`${apiPrefix}/messagesList.json/${date}`);
     },
 
-    createNote(data) {
-        return axios.post(`${apiPrefix}/addMessage`, data);
+    createStatement(statement) {
+        return axios.post(`${apiPrefix}/addMessage`, statement);
     },
 
-    deleteNote(idMessage) {
+    deleteStatement(idMessage) {
         return axios.delete(`${apiPrefix}/delMessage/${idMessage}`);
     },
 

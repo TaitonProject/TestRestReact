@@ -28,11 +28,11 @@ app.use(function (err, req, res, next) {
 
 // RESTful api handlers
 app.get('/reservation/:date', (req, res) => {
-    db.listNotes(req.param.dateTimeStart).then(data => res.send(data));
+    db.listStatements(req.param.dateTimeStart).then(data => res.send(data));
 });
 
 /*app.post('/reservation', function(req, res) {
- const note = new Note({
+ const note = new Statement({
  author: req.body.author,
  dateTimeStart: req.body.dateTimeStart,
  dateTimeEnd: req.body.dateTimeEnd,
@@ -42,7 +42,7 @@ app.get('/reservation/:date', (req, res) => {
  console.log(req.body.dateTimeStart);
  console.log(Date(req.body.dateTimeStart));
  console.log(moment.utc(req.body.dateTimeStart));
- Note.findOne({
+ Statement.findOne({
  $or : [
  { $and : [ { dateTimeStart : {$lt : moment.utc(req.body.dateTimeStart)} }, { dateTimeEnd : { $gt : moment.utc(req.body.dateTimeStart) }} ] },
  { $and : [ { dateTimeEnd : {$gt : moment.utc(req.body.dateTimeEnd)} }, { dateTimeStart : {$lt :  moment.utc(req.body.dateTimeEnd)} } ] },
@@ -62,11 +62,11 @@ app.get('/reservation/:date', (req, res) => {
  });*/
 
 app.post('/reservation/', function (req, res) {
-    db.createNote(req.body).then(data => res.send(data)).reject(res.statusCode = 400);
+    db.createStatement(req.body).then(data => res.send(data)).reject(res.statusCode = 400);
 });
 
 app.delete('/reservation/:id', (req, res) => {
-    db.deleteNote(req.params.id).then(data => res.send(data));
+    db.deleteStatement(req.params.id).then(data => res.send(data));
 });
 
 const server = app.listen(serverPort, function () {

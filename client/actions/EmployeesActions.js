@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import Constants from '../constants/AppEmployeeConstants';
+import Constants from '../constants/EmployeeConstants';
 
 import api from '../api';
 

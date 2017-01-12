@@ -14,8 +14,8 @@ export function listNotes() {
     return Note.find();
 }
 
-/*export function createNote(data) {
-    const note = new Note({
+/*export function createStatement(data) {
+    const note = new Statement({
         author: data.author,
         dateTimeStart: data.dateTimeStart,
         dateTimeEnd: data.dateTimeEnd,
@@ -28,7 +28,7 @@ export function listNotes() {
         } else if ()
     })
 
-    Note.findOne({author: data.author}, function result (err, notes) {
+    Statement.findOne({author: data.author}, function result (err, notes) {
         if (!notes) {
             console.log('не существует!');
             return note.save();

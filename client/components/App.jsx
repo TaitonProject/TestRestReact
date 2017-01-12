@@ -7,14 +7,14 @@ import CircularProgress from '../../node_modules/material-ui/CircularProgress/Ci
 import Dialog from '../../node_modules/material-ui/Dialog/Dialog';
 import FlatButton from '../../node_modules/material-ui/FlatButton/FlatButton';
 
-import NotesStore from '../stores/NotesStore';
-import NotesActions from '../actions/NotesActions';
+import StatementsStore from '../stores/StatementsStore';
+import StatementsActions from '../actions/StatementsActions';
 
 import EmployeesStore from '../stores/EmployeesStore';
 import EmployeesActions from '../actions/EmployeesActions';
 
-import NoteEditor from './NoteEditor.jsx';
-import NotesGrid from './NotesGrid.jsx';
+import StatementEditor from './StatementEditor.jsx';
+import StatementsGrid from './StatementsGrid.jsx';
 
 var injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
@@ -22,11 +22,11 @@ import './App.less';
 
 function getStateFromFlux() {
     return {
-        isLoadingNotes: NotesStore.isLoading(),
+        isLoadingStatements: StatementsStore.isLoading(),
         isLoadingEmployees: EmployeesStore.isLoading(),
-        notes: NotesStore.getNotes(),
+        statements: StatementsStore.getStatements(),
         employees: EmployeesStore.getEmployees(),
-        addNoteError: NotesStore.getNoteError()
+        addStatementError: StatementsStore.getStatementError()
     };
 }
 
@@ -40,33 +40,33 @@ const App = React.createClass({
     componentWillMount() {
         var date = moment(new Date()).format('YYYY-MM-DD');
         EmployeesActions.loadEmployees();
-        NotesActions.loadNotes(date);
+        StatementsActions.loadStatements(date);
     },
 
     componentDidMount() {
-        NotesStore.addChangeListener(this._onChange);
+        StatementsStore.addChangeListener(this._onChange);
         EmployeesStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
-        NotesStore.removeChangeListener(this._onChange);
+        StatementsStore.removeChangeListener(this._onChange);
         EmployeesStore.removeChangeListener(this._onChange);
     },
 
-    handleNoteDelete(note) {
-        NotesActions.deleteNote(note);
+    handleStatementDelete(statement) {
+        StatementsActions.deleteStatement(statement);
     },
 
-    handleNoteAdd(noteData) {
-        NotesActions.createNote(noteData);
+    handleStatementAdd(statement) {
+        StatementsActions.createStatement(statement);
     },
 
     handleChangeDateStart(date) {
-        NotesActions.loadNotes(date);
+        StatementsActions.loadStatements(date);
     },
 
-    handleChangeAddNoteErr(){
-        this.setState({addNoteError: false});
+    handleChangeAddStatementErr(){
+        this.setState({addStatementError: false});
     },
 
     render() {
@@ -74,7 +74,7 @@ const App = React.createClass({
             <FlatButton
                 label="OK"
                 primary={true}
-                onTouchTap={this.handleChangeAddNoteErr}
+                onTouchTap={this.handleChangeAddStatementErr}
             />,
         ];
 
@@ -86,19 +86,19 @@ const App = React.createClass({
                         <Dialog
                             actions={actions}
                             modal={false}
-                            open={this.state.addNoteError}
-                            onRequestClose={this.handleChangeAddNoteErr}
+                            open={this.state.addStatementError}
+                            onRequestClose={this.handleChangeAddStatementErr}
                         >
                             Ошибка, добавить Вашу заявку не удалось.
                             Проверьте введенные данные!
                         </Dialog>
                     </div>
-                    <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
+                    <StatementEditor onStatementAdd={this.handleStatementAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}
-                                addNoteError={this.handleChangeAddNoteErr}/>
+                                addStatementError={this.handleChangeAddStatementErr}/>
                     {
-                        (!this.state.isLoadingNotes ?
-                            <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
+                        (!this.state.isLoadingStatements ?
+                            <StatementsGrid statements={this.state.statements} onStatementDelete={this.handleStatementDelete}/>
                             :
                             <CircularProgress size={80} thickness={5} />)
                     }
