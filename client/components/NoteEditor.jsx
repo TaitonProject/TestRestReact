@@ -55,11 +55,11 @@ const NoteEditor = React.createClass({
     },
 
     handleOpen(){
-        return this.setState({open: true});
+
     },
 
     handleClose (){
-        return this.setState({open: false});
+
     },
 
     render() {
@@ -79,12 +79,11 @@ const NoteEditor = React.createClass({
         return (
             <div>
                 <div>
-                    {/*{this.props.addNoteError ? this.handleOpen : null}*/}
                     <Dialog
                         actions={actions}
                         modal={false}
-                        open={this.state.open}
-                        onRequestClose={this.handleClose}
+                        open={this.props.addNoteError}
+                        onRequestClose={!this.props.addNoteError}
                     >
                         Discard draft?
                     </Dialog>
@@ -101,8 +100,7 @@ const NoteEditor = React.createClass({
                                 value={em.id}
                                 primaryText={`Сотрудник ${em.name}` + ` ${em.id}`}
                             >
-                            </MenuItem>
-                        )
+                            </MenuItem>)
                     }
                 </SelectField>
 
@@ -136,9 +134,6 @@ const NoteEditor = React.createClass({
                     primary={true}
                     onClick={this.handleNoteAdd}
                 />
-
-
-
             </div>
         );
     }

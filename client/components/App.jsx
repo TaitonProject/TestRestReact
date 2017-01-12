@@ -64,6 +64,11 @@ const App = React.createClass({
         NotesActions.loadNotes(date);
     },
 
+    handleChangeAddNoteErr(value){
+        NotesActions.
+        this.setState({addNoteError: value});
+    },
+
     render() {
         return (
             <MuiThemeProvider>
@@ -71,7 +76,7 @@ const App = React.createClass({
                     <h2 className="App__header">Бронирование конференц-зала</h2>
                     <NoteEditor onNoteAdd={this.handleNoteAdd} getListByDate={this.handleChangeDateStart}
                                 employees={this.state.employees}
-                                addNoteError={this.state.addNoteError}/>
+                                addNoteError={this.handleChangeAddNoteErr}/>
                     {
                         (!this.state.isLoadingNotes ?
                             <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}/>
