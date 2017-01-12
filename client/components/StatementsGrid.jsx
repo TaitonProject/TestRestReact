@@ -22,16 +22,16 @@ const StatementsGrid = React.createClass({
             >
                 {
                     (this.props.statements.length != 0) ?
-                    this.props.statements.map(statement =>
-                        <Statement
-                            key={statement.id}
-                            onDelete={this.props.onStatementDelete.bind(null, statement)}
-                            employee={statement.employee}
-                            startTime={statement.startTime}
-                            endTime={statement.endTime}
-                        >
-                        </Statement>
-                    )
+                        this.props.statements.map(statement =>
+                            <Statement
+                                key={statement.id}
+                                onDelete={this.props.onStatementDelete.bind(null, statement)}
+                                employee={statement.employee}
+                                startTime={statement.startTime}
+                                endTime={statement.endTime}
+                            >
+                            </Statement>
+                        )
                         :
                         <h2>Нет записей</h2>
                 }

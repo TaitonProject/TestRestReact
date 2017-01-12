@@ -37,15 +37,14 @@ const StatementActions = {
         api.createStatement(newStatement)
             .then(() =>
                 AppDispatcher.dispatch({
-                    type: Constants.ADD_STATEMENTS_SUCCESS
+                    type: Constants.ADD_STATEMENT_SUCCESS
                 }, this.loadStatements(newStatement.requestedDate))
-
             )
             .catch(err =>
                 AppDispatcher.dispatch({
-                    type: Constants.ADD_STATEMENTS_FAIL,
+                    type: Constants.ADD_STATEMENT_FAIL,
                     error: err
-                },console.log(err))
+                }, console.log(err))
             );
     },
 

@@ -50,6 +50,7 @@ AppDispatcher.register(function (action) {
     switch (action.type) {
         case AppConstants.LOAD_STATEMENTS_REQUEST: {
             _isLoading = true;
+            _addStatementError = false;
             StatementStore.emitChange();
             break;
         }
@@ -67,13 +68,13 @@ AppDispatcher.register(function (action) {
             break;
         }
 
-        case AppConstants.ADD_STATEMENT_SUCCESS:{
+        case AppConstants.ADD_STATEMENT_SUCCESS: {
             _addStatementError = false;
             StatementStore.emitChange();
             break;
         }
 
-        case AppConstants.ADD_STATEMENT_FAIL:{
+        case AppConstants.ADD_STATEMENT_FAIL: {
             _addStatementError = true;
             StatementStore.emitChange();
             break;

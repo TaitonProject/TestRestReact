@@ -16,9 +16,10 @@ import EmployeesActions from '../actions/EmployeesActions';
 import StatementEditor from './StatementEditor.jsx';
 import StatementsGrid from './StatementsGrid.jsx';
 
+import './App.less';
 var injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
-import './App.less';
+
 
 function getStateFromFlux() {
     return {
@@ -65,7 +66,7 @@ const App = React.createClass({
         StatementsActions.loadStatements(date);
     },
 
-    handleChangeAddStatementErr(){
+    closeAlert(){
         this.setState({addStatementError: false});
     },
 
@@ -74,7 +75,7 @@ const App = React.createClass({
             <FlatButton
                 label="OK"
                 primary={true}
-                onTouchTap={this.handleChangeAddStatementErr}
+                onTouchTap={this.closeAlert}
             />,
         ];
 
@@ -82,25 +83,28 @@ const App = React.createClass({
             <MuiThemeProvider>
                 <div className='App'>
                     <h2 className="App__header">Бронирование конференц-зала</h2>
-                    <div>
-                        <Dialog
-                            actions={actions}
-                            modal={false}
-                            open={this.state.addStatementError}
-                            onRequestClose={this.handleChangeAddStatementErr}
-                        >
-                            Ошибка, добавить Вашу заявку не удалось.
-                            Проверьте введенные данные!
-                        </Dialog>
-                    </div>
-                    <StatementEditor onStatementAdd={this.handleStatementAdd} getListByDate={this.handleChangeDateStart}
-                                employees={this.state.employees}
-                                addStatementError={this.handleChangeAddStatementErr}/>
+                    <Dialog
+                        actions={actions}
+                        modal={false}
+                        open={this.state.addStatementError}
+                        onRequestClose={this.closeAlert}
+                    >
+                        Ошибка! Не удалось добавить Вашу заявку.
+                        Проверьте введенные данные!
+                    </Dialog>
+                    <StatementEditor
+                        onStatementAdd={this.handleStatementAdd}
+                        getListByDate={this.handleChangeDateStart}
+                        employees={this.state.employees}
+                    />
                     {
-                        (!this.state.isLoadingStatements ?
-                            <StatementsGrid statements={this.state.statements} onStatementDelete={this.handleStatementDelete}/>
+                        (!this.state.isLoadingStatements
+                            ?
+                            <StatementsGrid
+                                statements={this.state.statements}
+                                onStatementDelete={this.handleStatementDelete}/>
                             :
-                            <CircularProgress size={80} thickness={5} />)
+                            <CircularProgress size={80} thickness={5}/>)
                     }
                 </div>
             </MuiThemeProvider>
