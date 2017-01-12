@@ -12,8 +12,7 @@ const Note = React.createClass({
                 {
                     <h4 className='Note__author'>{this.props.employee}</h4>
                 }
-                <div className='Note__dateTimeStart'>{this.props.requestedTime}</div>
-                <div className='Note__dateTimeEnd'>{this.props.durationTime}</div>
+                <div className='Note__dateTimeStart'>{this.props.requestedTime} - {this.props.durationTime}</div>
             </div>
         );
     }

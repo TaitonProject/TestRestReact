@@ -27,7 +27,7 @@ const NoteActions = {
             );
     },
 
-    createNote(note, date) {
+    createNote(note) {
         var newNote = {
             employee: note.employee,
             requestedTime: moment(note.requestedTime).format('HH:mm'),
@@ -38,7 +38,7 @@ const NoteActions = {
         console.log(note.requestedDate);
         api.createNote(newNote)
             .then(() =>
-                this.loadNotes(note.requestedDate)
+                this.loadNotes(newNote.requestedDate)
             )
             .catch(err =>
                 console.error(err)

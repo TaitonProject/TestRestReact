@@ -19,7 +19,6 @@ const NotesGrid = React.createClass({
             gutter: 10,
             isFitWidth: true
         };
-
         return (
             <Masonry
                 className='NotesGrid'
@@ -34,7 +33,6 @@ const NotesGrid = React.createClass({
                             requestedTime={note.requestedTime}
                             durationTime={note.durationTime}
                         >
-
                         </Note>
                     )
                 }

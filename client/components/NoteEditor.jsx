@@ -55,6 +55,7 @@ const NoteEditor = React.createClass({
         return (
             <div>
                 <SelectField
+                    hintText="Выберите профиль"
                     value={this.state.employee}
                     onChange={this.handleSelectChange}>
                     {
