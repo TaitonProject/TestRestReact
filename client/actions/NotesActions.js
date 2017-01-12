@@ -34,6 +34,7 @@ const NoteActions = {
             durationTime: moment(note.durationTime).format('HH:mm'),
             requestedDate: moment(note.requestedDate).format('YYYY-MM-DD')
         };
+
         console.log(note.requestedDate);
         api.createNote(newNote)
             .then(() =>
