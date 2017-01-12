@@ -27,6 +27,32 @@ const NoteActions = {
             );
     },
 
+/*    createNote(note) {
+        var newNote = {
+            employee: note.employee,
+            requestedTime: moment(note.requestedTime).format('HH:mm'),
+            durationTime: moment(note.durationTime).format('HH:mm'),
+            requestedDate: moment(note.requestedDate).format('YYYY-MM-DD')
+        };
+
+        AppDispatcher.dispatch({
+            type: Constants.ADD_NOTE_REQUEST
+        });
+        api.createNote(newNote)
+            .then(() =>
+                AppDispatcher.dispatch({
+                    type: Constants.ADD_NOTE_SUCCESS,
+                    data: newNote
+                }), this.loadNotes(newNote.requestedDate)
+            )
+            .catch(err =>
+                AppDispatcher.dispatch({
+                    type: Constants.ADD_NOTE_FAIL,
+                    error: err
+                })
+            );
+    },*/
+
     createNote(note) {
         var newNote = {
             employee: note.employee,
@@ -37,17 +63,13 @@ const NoteActions = {
 
         api.createNote(newNote)
             .then(() =>
-                AppDispatcher.dispatch({
-                    type: Constants.ADD_NOTE_SUCCESS
-                }, this.loadNotes(newNote.requestedDate))
-
-            )
-            .catch(err =>
-                AppDispatcher.dispatch({
-                    type: Constants.ADD_NOTE_FAIL,
-                    error: err
-                },console.log(err))
-            );
+            (this.loadNotes(newNote.requestedDate),
+            AppDispatcher.dispatch(
+                {type: Constants.ADD_NOTE_SUCCESS})
+            )).catch(err =>
+            (AppDispatcher.dispatch(
+                {type: Constants.ADD_NOTE_FAIL, error: err}
+                ,console.log(err))));
     },
 
     deleteNote(note) {

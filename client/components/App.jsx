@@ -57,8 +57,8 @@ const App = React.createClass({
         NotesActions.deleteNote(note);
     },
 
-    handleNoteAdd(noteData) {
-        NotesActions.createNote(noteData);
+    handleNoteAdd(note) {
+        NotesActions.createNote(note);
     },
 
     handleChangeDateStart(date) {

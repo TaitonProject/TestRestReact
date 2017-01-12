@@ -69,6 +69,7 @@ AppDispatcher.register(function (action) {
         }
 
         case AppConstants.ADD_NOTE_SUCCESS:{
+            _notes = action.notes.push(action.data);
             _addNoteError = false;
             NoteStore.emitChange();
             break;
